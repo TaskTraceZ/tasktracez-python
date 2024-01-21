@@ -18,3 +18,7 @@ module "aws_cognito" {
 module "aws_apigateway" {
   source = "./aws/modules/api_gateway"
 }
+
+module "aws_vpc" {
+  source = "./aws/modules/vpc"
+}
