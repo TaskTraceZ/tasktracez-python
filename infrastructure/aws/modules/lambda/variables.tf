@@ -1,3 +1,14 @@
-variable "aws_access_key" {}
-variable "aws_secret_key" {}
-variable "aws_region" {}
+variable "AWS_ACCESS_KEY" {
+    type = string
+    default = "value"
+}
+
+variable "AWS_SECRET_KEY" {
+    type = string
+    default = "value"
+}
+
+variable "AWS_REGION" {
+    type = string
+    default = "value"
+}
