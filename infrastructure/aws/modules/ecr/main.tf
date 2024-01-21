@@ -15,7 +15,7 @@ resource "null_resource" "BuildAndPushTaskTraceZUserProjectsGetterImage" {
   provisioner "local-exec" {
     command = <<EOT
       docker build -t ${aws_ecr_repository.TaskTraceZUserProjectsGetterRepository.repository_url}:latest .
-      aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${aws_ecr_repository.TaskTraceZUserProjectsGetterRepository.repository_url}
+      aws ecr get-login-password --region ${var.AWS_REGION} | docker login --username AWS --password-stdin ${aws_ecr_repository.TaskTraceZUserProjectsGetterRepository.repository_url}
       docker push ${aws_ecr_repository.TaskTraceZUserProjectsGetterRepository.repository_url}:latest
     EOT
   }
