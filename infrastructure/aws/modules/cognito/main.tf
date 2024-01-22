@@ -11,3 +11,9 @@ resource "aws_cognito_user_pool" "TaskTraceZCognitoUserPool" {
     email_sending_account = "COGNITO_DEFAULT"
   }
 }
+
+resource "aws_cognito_user_pool_client" "TaskTraceZCognitoUserPoolClient" {
+  name = "tasktracez-cognito-user-pool-client"
+
+  user_pool_id = aws_cognito_user_pool.TaskTraceZCognitoUserPool.id
+}
