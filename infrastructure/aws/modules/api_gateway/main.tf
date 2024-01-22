@@ -1,3 +1,7 @@
+provider "aws" {
+  region     = var.AWS_REGION
+}
+
 resource "aws_api_gateway_rest_api" "TaskTraceZAPIGatewayRestApi" {
   name        = "tasktracez-apigateway-rest-api"
   description = "This is my API for demonstration purposes"
