@@ -14,9 +14,7 @@ terraform {
   }
 }
 
-provider "aws" {
-  region     = var.AWS_REGION
-}
+provider "aws" {}
 
 module "aws_ecr" {
   source = "./aws/modules/ecr"
