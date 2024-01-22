@@ -7,4 +7,7 @@ resource "aws_cognito_user_pool" "TaskTraceZCognitoUserPool" {
       priority = 1
     }
   }
+  email_configuration {
+    email_sending_account = "COGNITO_DEFAULT"
+  }
 }
