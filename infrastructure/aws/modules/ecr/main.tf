@@ -1,7 +1,3 @@
-provider "aws" {
-  region     = var.AWS_REGION
-}
-
 resource "aws_ecr_repository" "TaskTraceZCognitoPostAuthenticationRepository" {
   name                 = "tasktracez-cognito-post-authentication-repository"
   image_tag_mutability = "MUTABLE"
