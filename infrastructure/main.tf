@@ -1,10 +1,21 @@
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "5.33.0"
     }
   }
+
+  backend "remote" {
+    organization = "tirthya-kamal-dasgupta"
+    workspaces {
+      name = "tasktracez-infrastructure"
+    }
+  }
+}
+
+provider "aws" {
+  region     = var.AWS_REGION
 }
 
 module "aws_ecr" {
