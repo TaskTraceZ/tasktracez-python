@@ -14,6 +14,6 @@ resource "aws_cognito_user_pool" "TaskTraceZCognitoUserPool" {
 
 resource "aws_cognito_user_pool_client" "TaskTraceZCognitoUserPoolClient" {
   name = "tasktracez-cognito-user-pool-client"
-
   user_pool_id = aws_cognito_user_pool.TaskTraceZCognitoUserPool.id
+  generate_secret = false
 }
