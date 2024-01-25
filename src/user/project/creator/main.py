@@ -21,7 +21,7 @@ def handler(event, context):
     )
 
     with sqlalchemy_engine.connect() as sqlalchemy_engine_connection:
-        query = text(
+        user_project_creator_query = text(
             """
                 INSERT INTO projects
                     (
@@ -35,11 +35,13 @@ def handler(event, context):
                         :description,
                         :user_id
                     )
+                RETURNING
+                    id
             """
         )
 
-        new_project = sqlalchemy_engine_connection.execute(
-            query,
+        user_project_creation_result = sqlalchemy_engine_connection.execute(
+            user_project_creator_query,
             {
                 "title": title,
                 "description": description if description else "",
@@ -47,8 +49,29 @@ def handler(event, context):
             },
         )
 
+        project_id = user_project_creation_result.fetchone()[0]
+
         sqlalchemy_engine_connection.commit()
 
-        new_project_row_id = new_project.lastrowid
+        project_fetcher_query = text(
+            """
+                SELECT
+                    id,
+                    title,
+                    description,
+                    to_char(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at,
+                    to_char(updated_at, 'YYYY-MM-DD HH24:MI:SS') AS updated_at
+                FROM
+                    projects
+                WHERE
+                    id = :project_id;
+            """
+        )
 
-        return {"statusCode": 201}
+        project_result = sqlalchemy_engine_connection.execute(
+            project_fetcher_query, {"project_id": project_id}
+        )
+
+        project_result_dict = dict(project_result.mappings().fetchone())
+
+        return {"statusCode": 201, "body": json.dumps(project_result_dict)}
