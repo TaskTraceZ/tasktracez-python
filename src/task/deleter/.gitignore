@@ -127,8 +127,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-project-deleter/
-project-deleter.bak/
+task-deleter/
+task-deleter.bak/
 
 # Spyder project settings
 .spyderproject

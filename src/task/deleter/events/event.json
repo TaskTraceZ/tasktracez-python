@@ -1,26 +1,26 @@
 {
-    "resource": "/api/v1/project/{project}",
-    "path": "/api/v1/project/26/",
+    "resource": "/api/v1/task/{task}",
+    "path": "/api/v1/task/8/",
     "httpMethod": "DELETE",
     "headers": {
         "Accept": "*/*",
         "Accept-Encoding": "gzip, deflate, br",
-        "Authorization": "eyJraWQiOiJidXBReGI3QW16VlRVa3hSbVYrMG9pWVA3NUpnYnNzUmZZRFFcL0w5STVSMD0iLCJhbGciOiJSUzI1NiJ9.eyJhdF9oYXNoIjoibkpTWVVkOVZoVk1ka1FUTGE4Z0VXQSIsInN1YiI6IjgxMDIwMWZkLWIwNWQtNDI3Mi1iMjk0LTMxYTYwYTE4ZGRhYSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aC0xLmFtYXpvbmF3cy5jb21cL2FwLXNvdXRoLTFfZUhQT1ExRkZjIiwiY29nbml0bzp1c2VybmFtZSI6InRpcnRoeWFrYW1hbGRhc2d1cHRhIiwiYXVkIjoiNDJjNXYybWVrMDVia2U2bGF2NG83dWg0N28iLCJldmVudF9pZCI6ImNmZWI0MWVlLTc0M2MtNGQ2ZC1hMTcxLWM4NzQwMzgxZTlhNiIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNzA2MjMyODYyLCJleHAiOjE3MDYyMzY0NjIsImlhdCI6MTcwNjIzMjg2MiwianRpIjoiNmVmZTJiZmItYjUyYS00NDA4LWJjNWUtZDU1ZjVhNDQ5ZjYyIiwiZW1haWwiOiJ0aXJ0aHlha2FtYWxkYXNndXB0YTEyQHlhaG9vLmNvbSJ9.Wc3AaoR22LOleAKJygns0wvUczrEPN9OC4sPmv8ZZnCavcbAfHVXtOA3lSUjzuV30xa6dbbObmwtAf7ql4-sdREFMDHSfYoRxUEM1KmS4H_HJeizMdd2ba369V1iyG5wEl5x86VIYDvXYy0-Z5kJgmoqrGkyDz2BXuK-XJjSA-8SBXYyHpOpAcDwTdY6KxZAtefR__m2nZG46nOn97RZ7vIw6SoQ7Z6KwdL-DrSKfxsRn-6YeHq129L5BmD9jqg0fdwp36_fEwZ3Ch48yTWEhrSgkKxDgwA-EFlL1oLAcug-j5hz5fY7EN5dp28KyV79P6xtqjRkZxu4SE6Xb8UEJQ",
+        "Authorization": "eyJraWQiOiJidXBReGI3QW16VlRVa3hSbVYrMG9pWVA3NUpnYnNzUmZZRFFcL0w5STVSMD0iLCJhbGciOiJSUzI1NiJ9.eyJhdF9oYXNoIjoiZE83RWY3UmtEeHlmN09QcDBZWjlvQSIsInN1YiI6IjgxMDIwMWZkLWIwNWQtNDI3Mi1iMjk0LTMxYTYwYTE4ZGRhYSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aC0xLmFtYXpvbmF3cy5jb21cL2FwLXNvdXRoLTFfZUhQT1ExRkZjIiwiY29nbml0bzp1c2VybmFtZSI6InRpcnRoeWFrYW1hbGRhc2d1cHRhIiwiYXVkIjoiNDJjNXYybWVrMDVia2U2bGF2NG83dWg0N28iLCJldmVudF9pZCI6ImE1Y2MwY2VlLWY3NzQtNGFmOC1hZDVhLTI0MmQ3NzYwNmVlZiIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNzA2MjQ3NjUxLCJleHAiOjE3MDYyNTEyNTEsImlhdCI6MTcwNjI0NzY1MSwianRpIjoiYmM4NGFlYzEtZjBjOC00ODA5LWI1OWQtNTU0MjVlMDIwNDcwIiwiZW1haWwiOiJ0aXJ0aHlha2FtYWxkYXNndXB0YTEyQHlhaG9vLmNvbSJ9.cMH_O-cChxJcjY5FGOXRkiluRQGhB1_8ru4L0h8DLuYSHHea5LdNGX6TYuADspwPFgnq42a2yX-hDcz_kDHMOQ3-41jsx-srm7LvYzv-NqGbMYaiN39U1UEuzujzvQZnXNzlJ3LcfnnKxdJ8CvpRJz5KGRf27lzDCws3rP165_cOFWdnoSA2hJ05y_sT5fTiF6wLe8CWCqQSN0YSmM1ngofQivi6CjIg8gdJT5Shu3VumYBQ_x0wCvUmuCPC6OTrGWS-KEgi0ZNXQKEtplH8PP83V5T5Wfkho3uu8DTMdxGbP-Rj97unQEU8l8eG51G2VA0Ckreu0J0Flu6E5BH0vA",
         "Cache-Control": "no-cache",
         "CloudFront-Forwarded-Proto": "https",
         "CloudFront-Is-Desktop-Viewer": "true",
         "CloudFront-Is-Mobile-Viewer": "false",
         "CloudFront-Is-SmartTV-Viewer": "false",
         "CloudFront-Is-Tablet-Viewer": "false",
-        "CloudFront-Viewer-ASN": "45804",
-        "CloudFront-Viewer-Country": "IN",
+        "CloudFront-Viewer-ASN": "14618",
+        "CloudFront-Viewer-Country": "US",
         "Host": "hmw8xesnxc.execute-api.ap-south-1.amazonaws.com",
-        "Postman-Token": "8843f0e7-d5bd-4c9d-9035-b4eb733d854c",
-        "User-Agent": "PostmanRuntime/7.32.1",
-        "Via": "1.1 78844c00bd6cc9ba55086a896f473464.cloudfront.net (CloudFront)",
-        "X-Amz-Cf-Id": "-ey0cKuR7pc4n7SZbkpb8zne8h4AhkOEcDtd7IwZQ90s5G8hiIfOQg==",
-        "X-Amzn-Trace-Id": "Root=1-65b31020-0ebfa24852ffaa114ba1e3e6",
-        "X-Forwarded-For": "114.29.224.148, 15.158.39.18",
+        "Postman-Token": "0d0b7e38-8d6d-4028-acd0-30c368e9d905",
+        "User-Agent": "PostmanRuntime/7.36.1",
+        "Via": "1.1 55e412eec3baebe47cd72947531b5c5c.cloudfront.net (CloudFront)",
+        "X-Amz-Cf-Id": "7WwOLw7_l4Sv4_o_hGksxNYCDS9iV2a9qpCPLuQNJHNBf7VODOLW9g==",
+        "X-Amzn-Trace-Id": "Root=1-65b3b543-50939a616a10440d0a9e591c",
+        "X-Forwarded-For": "54.86.50.139, 64.252.151.139",
         "X-Forwarded-Port": "443",
         "X-Forwarded-Proto": "https"
     },
@@ -32,7 +32,7 @@
             "gzip, deflate, br"
         ],
         "Authorization": [
-            "eyJraWQiOiJidXBReGI3QW16VlRVa3hSbVYrMG9pWVA3NUpnYnNzUmZZRFFcL0w5STVSMD0iLCJhbGciOiJSUzI1NiJ9.eyJhdF9oYXNoIjoibkpTWVVkOVZoVk1ka1FUTGE4Z0VXQSIsInN1YiI6IjgxMDIwMWZkLWIwNWQtNDI3Mi1iMjk0LTMxYTYwYTE4ZGRhYSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aC0xLmFtYXpvbmF3cy5jb21cL2FwLXNvdXRoLTFfZUhQT1ExRkZjIiwiY29nbml0bzp1c2VybmFtZSI6InRpcnRoeWFrYW1hbGRhc2d1cHRhIiwiYXVkIjoiNDJjNXYybWVrMDVia2U2bGF2NG83dWg0N28iLCJldmVudF9pZCI6ImNmZWI0MWVlLTc0M2MtNGQ2ZC1hMTcxLWM4NzQwMzgxZTlhNiIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNzA2MjMyODYyLCJleHAiOjE3MDYyMzY0NjIsImlhdCI6MTcwNjIzMjg2MiwianRpIjoiNmVmZTJiZmItYjUyYS00NDA4LWJjNWUtZDU1ZjVhNDQ5ZjYyIiwiZW1haWwiOiJ0aXJ0aHlha2FtYWxkYXNndXB0YTEyQHlhaG9vLmNvbSJ9.Wc3AaoR22LOleAKJygns0wvUczrEPN9OC4sPmv8ZZnCavcbAfHVXtOA3lSUjzuV30xa6dbbObmwtAf7ql4-sdREFMDHSfYoRxUEM1KmS4H_HJeizMdd2ba369V1iyG5wEl5x86VIYDvXYy0-Z5kJgmoqrGkyDz2BXuK-XJjSA-8SBXYyHpOpAcDwTdY6KxZAtefR__m2nZG46nOn97RZ7vIw6SoQ7Z6KwdL-DrSKfxsRn-6YeHq129L5BmD9jqg0fdwp36_fEwZ3Ch48yTWEhrSgkKxDgwA-EFlL1oLAcug-j5hz5fY7EN5dp28KyV79P6xtqjRkZxu4SE6Xb8UEJQ"
+            "eyJraWQiOiJidXBReGI3QW16VlRVa3hSbVYrMG9pWVA3NUpnYnNzUmZZRFFcL0w5STVSMD0iLCJhbGciOiJSUzI1NiJ9.eyJhdF9oYXNoIjoiZE83RWY3UmtEeHlmN09QcDBZWjlvQSIsInN1YiI6IjgxMDIwMWZkLWIwNWQtNDI3Mi1iMjk0LTMxYTYwYTE4ZGRhYSIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aC0xLmFtYXpvbmF3cy5jb21cL2FwLXNvdXRoLTFfZUhQT1ExRkZjIiwiY29nbml0bzp1c2VybmFtZSI6InRpcnRoeWFrYW1hbGRhc2d1cHRhIiwiYXVkIjoiNDJjNXYybWVrMDVia2U2bGF2NG83dWg0N28iLCJldmVudF9pZCI6ImE1Y2MwY2VlLWY3NzQtNGFmOC1hZDVhLTI0MmQ3NzYwNmVlZiIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNzA2MjQ3NjUxLCJleHAiOjE3MDYyNTEyNTEsImlhdCI6MTcwNjI0NzY1MSwianRpIjoiYmM4NGFlYzEtZjBjOC00ODA5LWI1OWQtNTU0MjVlMDIwNDcwIiwiZW1haWwiOiJ0aXJ0aHlha2FtYWxkYXNndXB0YTEyQHlhaG9vLmNvbSJ9.cMH_O-cChxJcjY5FGOXRkiluRQGhB1_8ru4L0h8DLuYSHHea5LdNGX6TYuADspwPFgnq42a2yX-hDcz_kDHMOQ3-41jsx-srm7LvYzv-NqGbMYaiN39U1UEuzujzvQZnXNzlJ3LcfnnKxdJ8CvpRJz5KGRf27lzDCws3rP165_cOFWdnoSA2hJ05y_sT5fTiF6wLe8CWCqQSN0YSmM1ngofQivi6CjIg8gdJT5Shu3VumYBQ_x0wCvUmuCPC6OTrGWS-KEgi0ZNXQKEtplH8PP83V5T5Wfkho3uu8DTMdxGbP-Rj97unQEU8l8eG51G2VA0Ckreu0J0Flu6E5BH0vA"
         ],
         "Cache-Control": [
             "no-cache"
@@ -53,31 +53,31 @@
             "false"
         ],
         "CloudFront-Viewer-ASN": [
-            "45804"
+            "14618"
         ],
         "CloudFront-Viewer-Country": [
-            "IN"
+            "US"
         ],
         "Host": [
             "hmw8xesnxc.execute-api.ap-south-1.amazonaws.com"
         ],
         "Postman-Token": [
-            "8843f0e7-d5bd-4c9d-9035-b4eb733d854c"
+            "0d0b7e38-8d6d-4028-acd0-30c368e9d905"
         ],
         "User-Agent": [
-            "PostmanRuntime/7.32.1"
+            "PostmanRuntime/7.36.1"
         ],
         "Via": [
-            "1.1 78844c00bd6cc9ba55086a896f473464.cloudfront.net (CloudFront)"
+            "1.1 55e412eec3baebe47cd72947531b5c5c.cloudfront.net (CloudFront)"
         ],
         "X-Amz-Cf-Id": [
-            "-ey0cKuR7pc4n7SZbkpb8zne8h4AhkOEcDtd7IwZQ90s5G8hiIfOQg=="
+            "7WwOLw7_l4Sv4_o_hGksxNYCDS9iV2a9qpCPLuQNJHNBf7VODOLW9g=="
         ],
         "X-Amzn-Trace-Id": [
-            "Root=1-65b31020-0ebfa24852ffaa114ba1e3e6"
+            "Root=1-65b3b543-50939a616a10440d0a9e591c"
         ],
         "X-Forwarded-For": [
-            "114.29.224.148, 15.158.39.18"
+            "54.86.50.139, 64.252.151.139"
         ],
         "X-Forwarded-Port": [
             "443"
@@ -89,50 +89,34 @@
     "queryStringParameters": null,
     "multiValueQueryStringParameters": null,
     "pathParameters": {
-        "project": "26"
+        "task": "8"
     },
     "stageVariables": null,
     "requestContext": {
-        "resourceId": "s3pf7k",
-        "authorizer": {
-            "claims": {
-                "at_hash": "nJSYUd9VhVMdkQTLa8gEWA",
-                "sub": "810201fd-b05d-4272-b294-31a60a18ddaa",
-                "aud": "42c5v2mek05bke6lav4o7uh47o",
-                "event_id": "cfeb41ee-743c-4d6d-a171-c8740381e9a6",
-                "token_use": "id",
-                "auth_time": "1706232862",
-                "iss": "https://cognito-idp.ap-south-1.amazonaws.com/ap-south-1_eHPOQ1FFc",
-                "cognito:username": "tirthyakamaldasgupta",
-                "exp": "Fri Jan 26 02:34:22 UTC 2024",
-                "iat": "Fri Jan 26 01:34:22 UTC 2024",
-                "jti": "6efe2bfb-b52a-4408-bc5e-d55f5a449f62",
-                "email": "tirthyakamaldasgupta12@yahoo.com"
-            }
-        },
-        "resourcePath": "/api/v1/project/{project}",
+        "resourceId": "zxf2pp",
+        "resourcePath": "/api/v1/task/{task}",
         "httpMethod": "DELETE",
-        "extendedRequestId": "SH91IE64hcwEPYA=",
-        "requestTime": "26/Jan/2024:01:51:28 +0000",
-        "path": "/dev/api/v1/project/26/",
+        "extendedRequestId": "SJlCjGfZBcwEHhQ=",
+        "requestTime": "26/Jan/2024:13:36:03 +0000",
+        "path": "/dev/api/v1/task/8/",
         "accountId": "778239090470",
         "protocol": "HTTP/1.1",
         "stage": "dev",
         "domainPrefix": "hmw8xesnxc",
-        "requestTimeEpoch": 1706233888547,
-        "requestId": "b40ab1dc-1c42-4de9-a78e-fb75875d0b5f",
+        "requestTimeEpoch": 1706276163252,
+        "requestId": "cfa977e8-f304-47c1-bb1a-83dcf81c94e9",
         "identity": {
             "cognitoIdentityPoolId": null,
             "accountId": null,
             "cognitoIdentityId": null,
             "caller": null,
-            "sourceIp": "114.29.224.148",
+            "sourceIp": "54.86.50.139",
             "principalOrgId": null,
             "accessKey": null,
             "cognitoAuthenticationType": null,
             "cognitoAuthenticationProvider": null,
             "userArn": null,
-            "userAgent": "PostmanRuntime/7.32.1",
+            "userAgent": "PostmanRuntime/7.36.1",
             "user": null
         },
         "domainName": "hmw8xesnxc.execute-api.ap-south-1.amazonaws.com",
