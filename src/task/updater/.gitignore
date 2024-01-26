@@ -127,8 +127,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-project-updater/
-project-updater.bak/
+task-updater/
+task-updater.bak/
 
 # Spyder project settings
 .spyderproject
