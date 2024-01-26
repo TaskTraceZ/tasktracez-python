@@ -127,8 +127,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-project-getter/
-project-getter.bak/
+task-getter/
+task-getter.bak/
 
 # Spyder project settings
 .spyderproject

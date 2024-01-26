@@ -9,7 +9,7 @@ load_dotenv()
 
 def handler(event, context):
     user_id = event["requestContext"]["authorizer"]["claims"]["sub"]
-    project_id = event["pathParameters"]["project"]
+    task_id = event["pathParameters"]["task"]
 
     sqlalchemy_engine = create_engine(
         f"postgresql+pg8000://{os.environ['DATABASE_USERNAME']}:{os.environ['DATABASE_PASSWORD']}@{os.environ['DATABASE_URL']}/{os.environ['DATABASE_NAME']}",
@@ -17,7 +17,7 @@ def handler(event, context):
     )
 
     with sqlalchemy_engine.connect() as sqlalchemy_engine_connection:
-        project_fetcher_query = text(
+        task_fetcher_query = text(
             """
                 SELECT
                     id,
@@ -26,16 +26,16 @@ def handler(event, context):
                     to_char(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at,
                     to_char(updated_at, 'YYYY-MM-DD HH24:MI:SS') AS updated_at
                 FROM
-                    projects
+                    tasks
                 WHERE
-                    id = :project_id
+                    id = :task_id
             """
         )
 
-        project_result = sqlalchemy_engine_connection.execute(
-            project_fetcher_query, {"project_id": project_id}
+        task_result = sqlalchemy_engine_connection.execute(
+            task_fetcher_query, {"task_id": task_id}
         )
 
-        project_result_dict = dict(project_result.mappings().fetchone())
+        task_result_dict = dict(task_result.mappings().fetchone())
 
-        return {"statusCode": 200, "body": json.dumps(project_result_dict)}
+        return {"statusCode": 200, "body": json.dumps(task_result_dict)}
