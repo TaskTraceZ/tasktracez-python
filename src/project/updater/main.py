@@ -13,8 +13,17 @@ def handler(event, context):
 
     body = json.loads(event["body"])
 
-    title = body["title"]
-    description = body["description"] if "description" in body else ""
+    set_clauses_list = []
+    parameters = {}
+
+    for key in body:
+        set_clauses_list.append(f"{key} = :{key}")
+
+        parameters[key] = body[key]
+
+    parameters["project_id"] = project_id
+
+    set_clauses = ",\n\t\t\t".join(set_clauses_list)
 
     sqlalchemy_engine = create_engine(
         f"postgresql+pg8000://{os.environ['DATABASE_USERNAME']}:{os.environ['DATABASE_PASSWORD']}@{os.environ['DATABASE_URL']}/{os.environ['DATABASE_NAME']}",
@@ -23,22 +32,17 @@ def handler(event, context):
 
     with sqlalchemy_engine.connect() as sqlalchemy_engine_connection:
         project_updater_query = text(
-            """
+            f"""
                 UPDATE
                     projects
                 SET
-                    title = :title,
-                    description = :description
-
+                    {set_clauses}
                 WHERE
                     id = :project_id
             """
         )
 
-        sqlalchemy_engine_connection.execute(
-            project_updater_query,
-            {"title": title, "description": description, "project_id": project_id},
-        )
+        sqlalchemy_engine_connection.execute(project_updater_query, parameters)
 
         sqlalchemy_engine_connection.commit()
 
