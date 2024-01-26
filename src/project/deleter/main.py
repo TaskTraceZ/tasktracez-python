@@ -17,14 +17,9 @@ def handler(event, context):
     )
 
     with sqlalchemy_engine.connect() as sqlalchemy_engine_connection:
-        project_fetcher_query = text(
+        project_deleter_query = text(
             """
-                SELECT
-                    id,
-                    title,
-                    description,
-                    to_char(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at,
-                    to_char(updated_at, 'YYYY-MM-DD HH24:MI:SS') AS updated_at
+                DELETE
                 FROM
                     projects
                 WHERE
@@ -32,10 +27,10 @@ def handler(event, context):
             """
         )
 
-        project_result = sqlalchemy_engine_connection.execute(
-            project_fetcher_query, {"project_id": project_id}
+        sqlalchemy_engine_connection.execute(
+            project_deleter_query, {"project_id": project_id}
         )
 
-        project_result_dict = dict(project_result.mappings().fetchone())
+        sqlalchemy_engine_connection.commit()
 
-        return {"statusCode": 200, "body": json.dumps(project_result_dict)}
+        return {"statusCode": 204}
