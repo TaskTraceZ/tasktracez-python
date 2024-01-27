@@ -1,0 +1,11 @@
+version: '3'
+services:
+  tastracez-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
+        - NEXT_PUBLIC_BACKEND_API_PREFIX=$NEXT_PUBLIC_BACKEND_API_PREFIX
+    ports:
+      - "3000:3000"
