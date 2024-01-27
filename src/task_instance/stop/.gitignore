@@ -127,8 +127,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-task-instance-starter/
-task-instance-starter.bak/
+task-instance-stopper/
+task-instance-stopper.bak/
 
 # Spyder project settings
 .spyderproject

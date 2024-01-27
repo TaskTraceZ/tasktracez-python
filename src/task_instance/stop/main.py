@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 import json
 import os
 from dotenv import load_dotenv
@@ -10,7 +11,9 @@ load_dotenv()
 def handler(event, context):
     user_id = event["requestContext"]["authorizer"]["claims"]["sub"]
     task_instance_id = event["pathParameters"]["task-instance"]
-    started_at = event["queryStringParameters"]["started_at"]
+    stopped_at = event["queryStringParameters"]["stopped_at"]
+
+    stopped_at_time = datetime.strptime(stopped_at, "%H:%M:%S")
 
     sqlalchemy_engine = create_engine(
         f"postgresql+pg8000://{os.environ['DATABASE_USERNAME']}:{os.environ['DATABASE_PASSWORD']}@{os.environ['DATABASE_URL']}/{os.environ['DATABASE_NAME']}",
@@ -18,12 +21,46 @@ def handler(event, context):
     )
 
     with sqlalchemy_engine.connect() as sqlalchemy_engine_connection:
+        task_instance_fetcher_query = text(
+            """
+                SELECT
+                    started_at,
+                    stopped_at,
+                    duration_worked
+                FROM
+                    task_instances
+                WHERE
+                    id = :task_instance_id
+            """
+        )
+
+        task_instance_result = sqlalchemy_engine_connection.execute(
+            task_instance_fetcher_query, {"task_instance_id": task_instance_id}
+        )
+
+        task_instance_result_dict = dict(task_instance_result.mappings().fetchone())
+
+        started_at_to_seconds = (
+            task_instance_result_dict["started_at"].hour * 3600
+            + task_instance_result_dict["started_at"].minute * 60
+            + task_instance_result_dict["started_at"].second
+        )
+
+        stopped_at_to_seconds = (
+            stopped_at_time.hour * 3600
+            + stopped_at_time.minute * 60
+            + stopped_at_time.second
+        )
+
+        duration_worked = task_instance_result_dict["duration_worked"] + (stopped_at_to_seconds - started_at_to_seconds)
+
         task_instance_updater_query = text(
             f"""
                 UPDATE
                     task_instances
                 SET
-                    started_at = :started_at,
+                    stopped_at = :stopped_at,
+                    duration_worked = :duration_worked,
                     in_progress = :in_progress
 
                 WHERE
@@ -34,8 +71,9 @@ def handler(event, context):
         sqlalchemy_engine_connection.execute(
             task_instance_updater_query,
             {
-                "started_at": started_at,
-                "in_progress": True,
+                "stopped_at": stopped_at,
+                "duration_worked": duration_worked,
+                "in_progress": False,
                 "task_instance_id": task_instance_id,
             },
         )

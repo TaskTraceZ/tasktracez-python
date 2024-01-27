@@ -25,6 +25,7 @@ def handler(event, context):
                     task_instances.billable,
                     TO_CHAR(task_instances.started_at, 'HH24:MI:SS') AS started_at,
                     TO_CHAR(task_instances.stopped_at, 'HH24:MI:SS') AS stopped_at,
+                    task_instances.duration_worked,
                     task_instances.in_progress,
                     to_char(task_instances.created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at,
                     to_char(task_instances.updated_at, 'YYYY-MM-DD HH24:MI:SS') AS updated_at,

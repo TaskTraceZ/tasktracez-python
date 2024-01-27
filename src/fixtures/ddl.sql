@@ -52,6 +52,7 @@ CREATE TABLE task_instances (
     billable BOOLEAN NOT NULL,
     started_at TIME WITHOUT TIME ZONE NOT NULL DEFAULT '00:00:00',
     stopped_at TIME WITHOUT TIME ZONE NOT NULL DEFAULT '00:00:00',
+    duration_worked BIGINT DEFAULT 0,
     in_progress BOOLEAN NOT NULL DEFAULT false,
     task_id SERIAL REFERENCES tasks(id) ON DELETE CASCADE ON UPDATE CASCADE,
     created_at TIMESTAMPTZ DEFAULT current_timestamp,
