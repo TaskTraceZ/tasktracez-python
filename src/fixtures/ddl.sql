@@ -1,3 +1,27 @@
+CREATE OR REPLACE FUNCTION update_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = current_timestamp;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER users_updated_at_trigger
+BEFORE UPDATE ON users
+FOR EACH ROW EXECUTE FUNCTION update_timestamp();
+
+CREATE TRIGGER projects_updated_at_trigger
+BEFORE UPDATE ON projects
+FOR EACH ROW EXECUTE FUNCTION update_timestamp();
+
+CREATE TRIGGER tasks_updated_at_trigger
+BEFORE UPDATE ON tasks
+FOR EACH ROW EXECUTE FUNCTION update_timestamp();
+
+CREATE TRIGGER task_instances_updated_at_trigger
+BEFORE UPDATE ON task_instances
+FOR EACH ROW EXECUTE FUNCTION update_timestamp();
+
 CREATE TABLE users (
     id VARCHAR(255) PRIMARY KEY,
     user_name VARCHAR(255) NOT NULL UNIQUE,
