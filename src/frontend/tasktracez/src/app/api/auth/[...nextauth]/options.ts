@@ -1,6 +1,10 @@
 import { NextAuthOptions } from "next-auth";
 import CognitoProvider from "next-auth/providers/cognito";
 
+interface AdditionalProps {
+    id_token?: string;
+}
+
 export const options: NextAuthOptions = {
     providers: [
         CognitoProvider({
@@ -8,5 +12,19 @@ export const options: NextAuthOptions = {
             clientSecret: process.env.COGNITO_CLIENT_SECRET as string,
             issuer: process.env.COGNITO_ISSUER as string,
         })
-    ]
+    ],
+    callbacks: {
+        async jwt({ token, account }) {
+            let additionalProps: AdditionalProps = {};
+
+            if (account) {
+                additionalProps.id_token = account.id_token;
+            }
+
+            return { ...token, ...additionalProps };
+        },
+        async session({ session, token }) {
+            return { ...session, id_token: token.id_token };
+        },
+    }
 };
