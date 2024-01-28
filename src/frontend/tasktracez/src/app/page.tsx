@@ -6,10 +6,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { getPreviousDate, getNextDate, getFormattedDate, convertDateToTime } from '@/utils/date';
 import { convertTimeToSeconds, convertSecondsToTime } from '@/utils/date';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, Card, CardHeader, CardBody, Center, Flex, Heading, IconButton, Spacer, Text, VStack, StackDivider, Stack } from '@chakra-ui/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 export default function Home() {
+    const { data: session, status } = useSession();
+
+    console.log(session);
+
     const router = useRouter();
 
     const [taskInstances, setTaskInstances] = useState<TaskInstance[]>([]);
@@ -193,11 +199,15 @@ export default function Home() {
     };
 
     useEffect(() => {
-        const currentDate = new Date();
+        if (status === "unauthenticated") {
+            signIn();
+        } else if (status === "authenticated") {
+            const currentDate = new Date();
 
-        setStartDate(currentDate);
-        setEndDate(getNextDate(currentDate));
-    }, []);
+            setStartDate(currentDate);
+            setEndDate(getNextDate(currentDate));
+        }
+    }, [status]);
 
     useEffect(() => {
         if (startDate && endDate) {
@@ -234,115 +244,121 @@ export default function Home() {
     }, [inProgressTaskInstance]);
 
     return (
-        <VStack align={'right'} padding={'10%'}>
-            <Heading as='h2' size='xl' noOfLines={1}>Tasks</Heading>
+        <>
+            {session && (
+                <>
+                    <VStack align={'right'} padding={'10%'}>
+                        <Heading as='h2' size='xl' noOfLines={1}>Tasks</Heading>
 
-            <Flex>
-                <Box w='170px' h='10'>
-                    <IconButton aria-label='Search database' icon={<FontAwesomeIcon icon={faArrowLeft} size='lg' />} />
-                </Box>
-                <Spacer />
-                <Box w='300px' h='10' textAlign={'center'}>
-                    <Center w='full' h='full'>
-                        <Heading as='h5' size='sm'>
-                            {startDate ? getFormattedDate(startDate) : ''}
-                        </Heading>
-                    </Center>
-                </Box>
-                <Spacer />
-                <Box w='170px' h='10' textAlign={'right'}>
-                    <IconButton aria-label='Search database' icon={<FontAwesomeIcon icon={faArrowRight} size='lg' />} />
-                </Box>
-            </Flex>
+                        <Flex>
+                            <Box w='170px' h='10'>
+                                <IconButton aria-label='Search database' icon={<FontAwesomeIcon icon={faArrowLeft} size='lg' />} />
+                            </Box>
+                            <Spacer />
+                            <Box w='300px' h='10' textAlign={'center'}>
+                                <Center w='full' h='full'>
+                                    <Heading as='h5' size='sm'>
+                                        {startDate ? getFormattedDate(startDate) : ''}
+                                    </Heading>
+                                </Center>
+                            </Box>
+                            <Spacer />
+                            <Box w='170px' h='10' textAlign={'right'}>
+                                <IconButton aria-label='Search database' icon={<FontAwesomeIcon icon={faArrowRight} size='lg' />} />
+                            </Box>
+                        </Flex>
 
-            <Flex>
-                <Spacer />
-                <Box textAlign={'right'}>
-                    <IconButton aria-label='Search database' icon={<FontAwesomeIcon icon={faPlus} size='xl' />} onClick={handleTaskInstanceAddition} />
-                </Box>
-            </Flex>
+                        <Flex>
+                            <Spacer />
+                            <Box textAlign={'right'}>
+                                <IconButton aria-label='Search database' icon={<FontAwesomeIcon icon={faPlus} size='xl' />} onClick={handleTaskInstanceAddition} />
+                            </Box>
+                        </Flex>
 
-            {error ? (
-                <Alert status='error' rounded={'initial'}>
-                    <AlertIcon />
-                    <AlertTitle>{errorTitle}</AlertTitle>
-                    <AlertDescription>{errorDescription}</AlertDescription>
-                </Alert>
-            ) : (
-                <></>
-            )}
+                        {error ? (
+                            <Alert status='error' rounded={'initial'}>
+                                <AlertIcon />
+                                <AlertTitle>{errorTitle}</AlertTitle>
+                                <AlertDescription>{errorDescription}</AlertDescription>
+                            </Alert>
+                        ) : (
+                            <></>
+                        )}
 
-            {taskInstances.length > 0 ? (
-                <Card>
-                    <CardBody>
-                        <Stack divider={<StackDivider />} spacing='4'>
-                            {taskInstances.map((taskInstance) => (
-                                <Box key={taskInstance.id}>
-                                    <Flex>
-                                        <Box w={'80%'} textAlign={'left'}>
-                                            <Text pt='2' fontSize='large'>
-                                                {taskInstance.task_title}
-                                            </Text>
-                                        </Box>
-                                        <Spacer />
-                                        <Box w={'50%'} textAlign={'left'}>
-                                            <Text pt='2' fontSize='sm'>
-                                                {taskInstance.project_title}
-                                            </Text>
-                                        </Box>
-                                        <Spacer />
-                                        {taskInstance.billable ? (
-                                            <Box w={'50%'} textAlign={'right'}>
-                                                <Text pt='2' fontSize='sm'>
-                                                    Billable
-                                                </Text>
+                        {taskInstances.length > 0 ? (
+                            <Card>
+                                <CardBody>
+                                    <Stack divider={<StackDivider />} spacing='4'>
+                                        {taskInstances.map((taskInstance) => (
+                                            <Box key={taskInstance.id}>
+                                                <Flex>
+                                                    <Box w={'80%'} textAlign={'left'}>
+                                                        <Text pt='2' fontSize='large'>
+                                                            {taskInstance.task_title}
+                                                        </Text>
+                                                    </Box>
+                                                    <Spacer />
+                                                    <Box w={'50%'} textAlign={'left'}>
+                                                        <Text pt='2' fontSize='sm'>
+                                                            {taskInstance.project_title}
+                                                        </Text>
+                                                    </Box>
+                                                    <Spacer />
+                                                    {taskInstance.billable ? (
+                                                        <Box w={'50%'} textAlign={'right'}>
+                                                            <Text pt='2' fontSize='sm'>
+                                                                Billable
+                                                            </Text>
+                                                        </Box>
+                                                    ) : (
+                                                        <Box w={'50%'} textAlign={'right'}>
+                                                            <Text pt='2' fontSize='sm'>
+                                                                Non-billable
+                                                            </Text>
+                                                        </Box>
+                                                    )}
+                                                    {taskInstance.in_progress ? (
+                                                        <Box w={'50%'} textAlign={'right'}>
+                                                            <Text pt='2' fontSize='sm'>
+                                                                {convertSecondsToTime(inProgressTaskInstanceDurationWorked)}
+                                                            </Text>
+                                                        </Box>
+                                                    ) : (
+                                                        <>
+                                                            <Box w={'50%'} textAlign={'right'}>
+                                                                <Text pt='2' fontSize='sm'>
+                                                                    {taskInstance.duration_worked}
+                                                                </Text>
+                                                            </Box>
+                                                        </>
+                                                    )}
+                                                    {taskInstance.in_progress ? (
+                                                        <Box w={'50%'} textAlign={'right'}>
+                                                            <IconButton aria-label='Search database' size={'md'} icon={<FontAwesomeIcon icon={faPause} />} onClick={() => handleTaskInstanceStoppage(taskInstance.id)} />
+                                                        </Box>
+                                                    ) : (
+                                                        <Box w={'50%'} textAlign={'right'}>
+                                                            <IconButton aria-label='Search database' size={'md'} icon={<FontAwesomeIcon icon={faPlay} />} onClick={() => handleTaskInstanceContinuation(taskInstance.id)} />
+                                                        </Box>
+                                                    )}
+                                                </Flex>
                                             </Box>
-                                        ) : (
-                                            <Box w={'50%'} textAlign={'right'}>
-                                                <Text pt='2' fontSize='sm'>
-                                                    Non-billable
-                                                </Text>
-                                            </Box>
-                                        )}
-                                        {taskInstance.in_progress ? (
-                                            <Box w={'50%'} textAlign={'right'}>
-                                                <Text pt='2' fontSize='sm'>
-                                                    {convertSecondsToTime(inProgressTaskInstanceDurationWorked)}
-                                                </Text>
-                                            </Box>
-                                        ) : (
-                                            <>
-                                                <Box w={'50%'} textAlign={'right'}>
-                                                    <Text pt='2' fontSize='sm'>
-                                                        {taskInstance.duration_worked}
-                                                    </Text>
-                                                </Box>
-                                            </>
-                                        )}
-                                        {taskInstance.in_progress ? (
-                                            <Box w={'50%'} textAlign={'right'}>
-                                                <IconButton aria-label='Search database' size={'md'} icon={<FontAwesomeIcon icon={faPause} />} onClick={() => handleTaskInstanceStoppage(taskInstance.id)} />
-                                            </Box>
-                                        ) : (
-                                            <Box w={'50%'} textAlign={'right'}>
-                                                <IconButton aria-label='Search database' size={'md'} icon={<FontAwesomeIcon icon={faPlay} />} onClick={() => handleTaskInstanceContinuation(taskInstance.id)} />
-                                            </Box>
-                                        )}
-                                    </Flex>
+                                        ))}
+                                    </Stack>
+                                </CardBody>
+                            </Card>
+                        ) : (
+                            <Flex>
+                                <Spacer />
+                                <Box>
+                                    <Text fontSize='md'>It&apos;s pretty empty here! Add some tasks to fill the space.</Text>
                                 </Box>
-                            ))}
-                        </Stack>
-                    </CardBody>
-                </Card>
-            ) : (
-                <Flex>
-                    <Spacer />
-                    <Box>
-                        <Text fontSize='md'>It&apos;s pretty empty here! Add some tasks to fill the space.</Text>
-                    </Box>
-                    <Spacer />
-                </Flex>
+                                <Spacer />
+                            </Flex>
+                        )}
+                    </VStack>
+                </>
             )}
-        </VStack>
-    )
+        </>
+    );
 };
