@@ -53,4 +53,13 @@ def handler(event, context):
             dict(row) for row in task_instances_result_set.mappings().all()
         ]
 
-        return {"statusCode": 200, "body": json.dumps(task_instances_result)}
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+                "Access-Control-Allow-Credentials": True,
+                "Content-Type": "application/json",
+            },
+            "body": json.dumps(task_instances_result),
+        }

@@ -2,7 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CognitoProvider from "next-auth/providers/cognito";
 
 interface AdditionalProps {
-    id_token?: string;
+    idToken?: string;
 }
 
 export const options: NextAuthOptions = {
@@ -18,13 +18,13 @@ export const options: NextAuthOptions = {
             let additionalProps: AdditionalProps = {};
 
             if (account) {
-                additionalProps.id_token = account.id_token;
+                additionalProps.idToken = account.id_token;
             }
 
             return { ...token, ...additionalProps };
         },
         async session({ session, token }) {
-            return { ...session, id_token: token.id_token };
+            return { ...session, idToken: token.idToken };
         },
     }
 };

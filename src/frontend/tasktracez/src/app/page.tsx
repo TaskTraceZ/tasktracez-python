@@ -14,8 +14,6 @@ import Link from 'next/link';
 export default function Home() {
     const { data: session, status } = useSession();
 
-    console.log(session);
-
     const router = useRouter();
 
     const [taskInstances, setTaskInstances] = useState<TaskInstance[]>([]);
@@ -147,12 +145,21 @@ export default function Home() {
     }
 
     const fetchAndSetTaskInstancesData = async (startDate: string, endDate: string) => {
-        let url = new URL(`${process.env.NEXT_PUBLIC_BACKEND_URL}/${process.env.NEXT_PUBLIC_BACKEND_API_PREFIX}/task_instances/`);
+        let url = new URL(`${process.env.NEXT_PUBLIC_ENDPOINT}/${process.env.NEXT_PUBLIC_STAGE}/${process.env.NEXT_PUBLIC_PREFIX}/${process.env.NEXT_PUBLIC_VERSION}/task-instances/`);
+        
+        let headers = new Headers();
+        
+        headers.append('Content-Type', 'application/json');
+
+        if (session) {
+            headers.append('Authorization', session.idToken);
+        }
+
         const queryParameters = {
             start_date: startDate,
             end_date: endDate,
-            sort_by: 'created_at',
-            sort_order: 'desc'
+            // sort_by: 'created_at',
+            // sort_order: 'desc'
         };
 
         url.search = new URLSearchParams(queryParameters).toString();
@@ -160,7 +167,7 @@ export default function Home() {
         let response;
 
         try {
-            response = await fetch(url);
+            response = await fetch(url, {headers: headers});
         } catch (error) {
             setError(true);
             setErrorTitle('Error processing request:')
