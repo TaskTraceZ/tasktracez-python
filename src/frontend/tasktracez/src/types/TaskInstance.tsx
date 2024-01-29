@@ -5,7 +5,7 @@ interface TaskInstance {
     billable: boolean;
     started_at: string;
     stopped_at: string,
-    duration_worked: string;
+    duration_worked: number;
     in_progress: boolean;
     created_at: string;
     updated_at: string;

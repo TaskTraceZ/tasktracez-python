@@ -72,4 +72,13 @@ def handler(event, context):
 
         task_instance_result_dict = dict(task_instance_result.mappings().fetchone())
 
-        return {"statusCode": 200, "body": json.dumps(task_instance_result_dict)}
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+                "Access-Control-Allow-Credentials": True,
+                "Content-Type": "application/json",
+            },
+            "body": json.dumps(task_instance_result_dict)
+        }

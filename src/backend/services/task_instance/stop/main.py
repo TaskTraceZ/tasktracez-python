@@ -52,7 +52,9 @@ def handler(event, context):
             + stopped_at_time.second
         )
 
-        duration_worked = task_instance_result_dict["duration_worked"] + (stopped_at_to_seconds - started_at_to_seconds)
+        duration_worked = task_instance_result_dict["duration_worked"] + (
+            stopped_at_to_seconds - started_at_to_seconds
+        )
 
         task_instance_updater_query = text(
             f"""
@@ -110,4 +112,13 @@ def handler(event, context):
 
         task_instance_result_dict = dict(task_instance_result.mappings().fetchone())
 
-        return {"statusCode": 200, "body": json.dumps(task_instance_result_dict)}
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+                "Access-Control-Allow-Credentials": True,
+                "Content-Type": "application/json",
+            },
+            "body": json.dumps(task_instance_result_dict),
+        }

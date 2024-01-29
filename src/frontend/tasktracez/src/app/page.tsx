@@ -43,7 +43,16 @@ export default function Home() {
 
         clearError();
 
-        let url = new URL(`${process.env.NEXT_PUBLIC_BACKEND_URL}/${process.env.NEXT_PUBLIC_BACKEND_API_PREFIX}/task_instances/${id}/start/`);
+        let url = new URL(`${process.env.NEXT_PUBLIC_ENDPOINT}/${process.env.NEXT_PUBLIC_STAGE}/${process.env.NEXT_PUBLIC_PREFIX}/${process.env.NEXT_PUBLIC_VERSION}/task-instance/${id}/start/`);
+        
+        let headers = new Headers();
+
+        headers.append('Content-Type', 'application/json');
+
+        if (session) {
+            headers.append('Authorization', session.idToken);
+        }
+
         const queryParameters = {
             started_at: startedAt
         };
@@ -54,7 +63,8 @@ export default function Home() {
 
         try {
             response = await fetch(url, {
-                method: 'POST'
+                method: 'PATCH',
+                headers: headers
             });
         } catch (error) {
             setError(true);
@@ -96,7 +106,16 @@ export default function Home() {
 
         clearError();
 
-        let url = new URL(`${process.env.NEXT_PUBLIC_BACKEND_URL}/${process.env.NEXT_PUBLIC_BACKEND_API_PREFIX}/task_instances/${id}/stop/`);
+        let url = new URL(`${process.env.NEXT_PUBLIC_ENDPOINT}/${process.env.NEXT_PUBLIC_STAGE}/${process.env.NEXT_PUBLIC_PREFIX}/${process.env.NEXT_PUBLIC_VERSION}/task-instance/${id}/stop/`);
+        
+        let headers = new Headers();
+
+        headers.append('Content-Type', 'application/json');
+
+        if (session) {
+            headers.append('Authorization', session.idToken);
+        }
+
         const queryParameters = {
             stopped_at: stoppedAt
         };
@@ -107,7 +126,8 @@ export default function Home() {
 
         try {
             response = await fetch(url, {
-                method: 'POST'
+                method: 'PATCH',
+                headers: headers
             });
         } catch (error) {
             setError(true);
@@ -146,9 +166,9 @@ export default function Home() {
 
     const fetchAndSetTaskInstancesData = async (startDate: string, endDate: string) => {
         let url = new URL(`${process.env.NEXT_PUBLIC_ENDPOINT}/${process.env.NEXT_PUBLIC_STAGE}/${process.env.NEXT_PUBLIC_PREFIX}/${process.env.NEXT_PUBLIC_VERSION}/task-instances/`);
-        
+
         let headers = new Headers();
-        
+
         headers.append('Content-Type', 'application/json');
 
         if (session) {
@@ -167,7 +187,7 @@ export default function Home() {
         let response;
 
         try {
-            response = await fetch(url, {headers: headers});
+            response = await fetch(url, { headers: headers });
         } catch (error) {
             setError(true);
             setErrorTitle('Error processing request:')
@@ -234,9 +254,7 @@ export default function Home() {
         let intervalId: string | number | NodeJS.Timeout | undefined;
 
         if (inProgressTaskInstance) {
-            const inProgressTaskInstanceDurationWorked = convertTimeToSeconds(inProgressTaskInstance.duration_worked);
-
-            setInProgressTaskInstanceDurationWorked(inProgressTaskInstanceDurationWorked);
+            setInProgressTaskInstanceDurationWorked(inProgressTaskInstance.duration_worked);
 
             intervalId = setInterval(() => {
                 setInProgressTaskInstanceDurationWorked(prevTime => prevTime + 1);
@@ -334,7 +352,7 @@ export default function Home() {
                                                         <>
                                                             <Box w={'50%'} textAlign={'right'}>
                                                                 <Text pt='2' fontSize='sm'>
-                                                                    {taskInstance.duration_worked}
+                                                                    {convertSecondsToTime(taskInstance.duration_worked)}
                                                                 </Text>
                                                             </Box>
                                                         </>
