@@ -5,9 +5,6 @@ interface AdditionalProps {
     idToken?: string;
 }
 
-async function refreshIdAndAccessToken(token: string) {
-};
-
 export const options: NextAuthOptions = {
     providers: [
         CognitoProvider({
