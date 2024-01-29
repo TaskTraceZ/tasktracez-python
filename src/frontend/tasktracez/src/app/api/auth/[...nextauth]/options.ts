@@ -5,6 +5,9 @@ interface AdditionalProps {
     idToken?: string;
 }
 
+async function refreshIdAndAccessToken(token: string) {
+};
+
 export const options: NextAuthOptions = {
     providers: [
         CognitoProvider({
@@ -16,7 +19,7 @@ export const options: NextAuthOptions = {
     callbacks: {
         async jwt({ token, account }) {
             let additionalProps: AdditionalProps = {};
-
+            
             if (account) {
                 additionalProps.idToken = account.id_token;
             }

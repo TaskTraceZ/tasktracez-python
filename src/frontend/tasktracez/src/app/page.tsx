@@ -82,6 +82,10 @@ export default function Home() {
             return
         }
 
+        if (response.status === 401) {
+            signOut();
+        }
+
         if (response.status !== 200) {
             setError(true);
             setErrorTitle('Error processing request:')
@@ -145,6 +149,10 @@ export default function Home() {
             return
         }
 
+        if (response.status === 401) {
+            signOut();
+        }
+
         if (response.status !== 200) {
             setError(true);
             setErrorTitle('Error processing request:')
@@ -202,6 +210,10 @@ export default function Home() {
             setErrorDescription('Oops! Something went wrong while fetching task instances.\n' + 'Please try again later.');
 
             return
+        }
+
+        if (response.status === 401) {
+            signOut();
         }
 
         if (response.status !== 200) {
